@@ -1,0 +1,15 @@
+#editor {
+    display: flex;
+    justify-content: center;
+}
+#markdown-content, #preview-content {
+    width: 45%;
+    height: 80vh;
+    margin: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+#markdown-content {
+    resize: none;
+}
