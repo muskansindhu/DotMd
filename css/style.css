@@ -1,6 +1,6 @@
 html, body {
     margin: 0;
-    padding: 0;
+    padding: 0; 
     font-family: "Lucida Console", Courier, monospace;
 }
 
@@ -28,13 +28,17 @@ nav{
     resize: none;
     background-color: rgb(49, 49, 49);
     color: white;
+    font-family: initial;
+}
+
+#preview-content {
+    font-family: initial;
 }
 
 #component-block{
     width: 20%;
 }
 
-ul{
+nav ul, #component-block ul {
     list-style-type: none;
 }
-
