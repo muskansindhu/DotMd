@@ -1,9 +1,23 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Lucida Console", Courier, monospace;
+}
+
+nav{
+    background-color: #333;
+    color: white;
+    padding: 3px;
+    margin-bottom: 50px;
+    margin-top: 0px ;
+}
+
 #editor {
     display: flex;
     justify-content: center;
 }
 #markdown-content, #preview-content {
-    width: 45%;
+    width: 35%;
     height: 80vh;
     margin: 5px;
     padding: 10px;
@@ -12,4 +26,15 @@
 }
 #markdown-content {
     resize: none;
+    background-color: rgb(49, 49, 49);
+    color: white;
 }
+
+#component-block{
+    width: 20%;
+}
+
+ul{
+    list-style-type: none;
+}
+
