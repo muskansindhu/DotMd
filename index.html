@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
-    <script src="scripts/Description.js"></script>
+    <script src="scripts/Title&Description.js"></script>
     <script src="scripts/index.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <title>Markdown-Editor</title>
@@ -16,23 +16,73 @@
         <ul>
             <li><img src="images/logo.png"></li>
         </ul>
+        <ul>
+            <li>
+                <div class="button">
+                    Download
+                </div>
+            </li>
+        </ul>
     </nav>
-    <div id="editor">
+    <div id="editor">    
         <div id="component-block">
+            <div id="component-block-head"><p>Sections</p></div>
             <div id="added-component-block">
                 <p>Click on a section below to edit the contents</p>
-                <div class="list" draggable="true"><img src="images/icon_1.svg" alt="Icon">Section 1</div>
-                <div class="list" draggable="true"><img src="images/icon_1.svg" alt="Icon">Section 2</div>
-                <div class="list" draggable="true"><img src="images/icon_1.svg" alt="Icon">Section 3</div>
+                <div class="list" draggable="true">
+                    <img src="images/icon_1.svg" alt="Icon">
+                    <div class="text">Acknowledgement</div>
+                    <div class="icon-container">
+                        <img class="reset" src="images/icon_3.svg" alt="Reset">
+                        <img class="remove" src="images/icon_2.svg" alt="Remove">
+                    </div>
+                </div>
+                <div class="list" draggable="true">
+                    <img src="images/icon_1.svg" alt="Icon">
+                    <div class="text">Appendix</div>
+                    <div class="icon-container">
+                        <img class="reset" src="images/icon_3.svg" alt="Reset">
+                        <img class="remove" src="images/icon_2.svg" alt="Remove">
+                    </div>
+                </div>
+                <div class="list" draggable="true">
+                    <img src="images/icon_1.svg" alt="Icon">
+                    <div class="text">Authors</div>
+                    <div class="icon-container">
+                        <img class="reset" src="images/icon_3.svg" alt="Reset">
+                        <img class="remove" src="images/icon_2.svg" alt="Remove">
+                    </div>
+                </div>
             </div>
             <div id="new-component-block">
                 <p>Click on a section below to add it to your readme</p>
-                <div class="list" draggable="true"><img src="images/icon_1.svg" alt="Icon">Section 4</div>
-                <div class="list" draggable="true"><img src="images/icon_1.svg" alt="Icon">Section 5</div>
+                <div class="list" draggable="true">
+                    <img src="images/icon_1.svg" alt="Icon">
+                    <div class="text">API Reference</div>
+                    <div class="icon-container">
+                        <img class="reset" src="images/icon_3.svg" alt="Reset">
+                        <img class="remove" src="images/icon_2.svg" alt="Remove">
+                    </div>
+                </div>
+                <div class="list" draggable="true">
+                    <img src="images/icon_1.svg" alt="Icon">
+                    <div class="text">Title and Description</div>    
+                    <div class="icon-container">
+                        <img class="reset" src="images/icon_3.svg" alt="Reset">
+                        <img class="remove" src="images/icon_2.svg" alt="Remove">
+                    </div>
+                </div>
             </div>
         </div>
-        <textarea id="markdown-content"></textarea>
-        <div id="preview-content"></div> 
+        <div class="editor-container">
+            <p class="label">Editor</p>
+            <textarea id="markdown-content"></textarea>
+        </div>
+        <div class="preview-container">
+            <p class="label">Preview</p>
+            <p class="label" style="color: rgb(90, 89, 89); left: 80px;">Raw</p>
+            <div id="preview-content"></div>
+        </div>
     </div>
 </body>
 </html>
