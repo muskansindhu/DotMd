@@ -16,6 +16,7 @@ nav{
     display: flex;
     justify-content: center;
 }
+
 #markdown-content, #preview-content {
     width: 35%;
     height: 80vh;
@@ -24,6 +25,7 @@ nav{
     box-sizing: border-box;
     border: 1px solid #ccc;
 }
+
 #markdown-content {
     resize: none;
     background-color: rgb(49, 49, 49);
@@ -41,4 +43,30 @@ nav{
 
 nav ul, #component-block ul {
     list-style-type: none;
+}
+
+#added-component-block, #new-component-block{
+    width: auto;
+    min-height: auto;
+    margin: 2px;
+    border: 1px dashed;
+}
+
+#new-component-block{
+    margin-top: 80px;
+}
+
+.list{
+    height: 60px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    cursor: grab;
+    background: #9fcfff;
+}
+
+.list img{
+    width: 20px;
+    margin-right: 15px;
+    margin-left: 20px;
 }
