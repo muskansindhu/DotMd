@@ -37,7 +37,7 @@ function dragAndDrop() {
                 if (selected.innerHTML.includes('Section 4')) {
                     textToAdd = `\n\n## Hi Adhiraj`;
                 } else {
-                    textToAdd = `\n\n**What's up?**`;
+                    textToAdd = description();
                 }
     
                 markdownContent.value += textToAdd;

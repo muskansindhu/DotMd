@@ -4,12 +4,22 @@ html, body {
     font-family: "Lucida Console", Courier, monospace;
 }
 
-nav{
+nav {
     background-color: #333;
     color: white;
-    padding: 3px;
+    padding: 0 10px; 
     margin-bottom: 50px;
-    margin-top: 0px ;
+    margin-top: 0;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+}
+
+nav img {
+    width: 60px;
+    height: 60px;
+    margin: 0 10px; 
 }
 
 #editor {
@@ -49,7 +59,6 @@ nav ul, #component-block ul {
     width: auto;
     min-height: auto;
     margin: 2px;
-    border: 1px dashed;
 }
 
 #new-component-block{
@@ -57,12 +66,14 @@ nav ul, #component-block ul {
 }
 
 .list{
-    height: 60px;
+    height: 50px;
     margin: 10px;
     display: flex;
     align-items: center;
     cursor: grab;
-    background: #9fcfff;
+    background: #b4d8fc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .list img{
