@@ -61,8 +61,16 @@ nav ul, #component-block ul {
     margin: 2px;
 }
 
+#added-component-block p{
+    font: small sans-serif;
+}
+
 #new-component-block{
     margin-top: 80px;
+}
+
+#new-component-block p{
+    font: small sans-serif;
 }
 
 .list{
