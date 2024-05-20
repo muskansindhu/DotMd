@@ -36,7 +36,7 @@ nav img {
     justify-content: center;
 }
 
-#markdown-content, #preview-content {
+#preview-content {
     width: 100%;
     height: 80vh;
     padding: 10px;
@@ -45,10 +45,11 @@ nav img {
 }
 
 #markdown-content {
-    resize: none;
-    background-color: rgb(49, 49, 49);
-    color: white;
-    font-family: initial;
+    width: 100%;
+    height: 80vh;
+    padding: 0px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
 }
 
 #preview-content {

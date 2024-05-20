@@ -11,6 +11,14 @@ require(["vs/editor/editor.main"], function() {
         minimap: { enabled: false },
         scrollbar: { vertical: "hidden" },
         lineNumbers: "off",
+        wordWrap: 'on',
+        overviewRulerBorder: false,
+        overviewRulerLanes: 0,
+        hideCursorInOverviewRuler: true,
+        glyphMargin: true,
+        folding: false,
+        lineDecorationsWidth: 0,
+        lineNumbersMinChars: 0
     });
 
     editor.getModel().onDidChangeContent(() => {
