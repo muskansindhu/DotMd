@@ -7,6 +7,10 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
     <script src="scripts/Title&Description.js"></script>
+    <script src="scripts/Acknowledgement.js"></script>
+    <script src="scripts/ApiReference.js"></script>
+    <script src="scripts/Appendix.js"></script>
+    <script src="scripts/Authors.js"></script>
     <script src="scripts/index.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <title>Markdown-Editor</title>
@@ -29,6 +33,9 @@
             <div id="component-block-head"><p>Sections</p></div>
             <div id="added-component-block">
                 <p>Click on a section below to edit the contents</p>
+            </div>
+            <div id="new-component-block">
+                <p>Click on a section below to add it to your readme</p>
                 <div class="list" draggable="true">
                     <img src="images/icon_1.svg" alt="Icon">
                     <div class="text">Acknowledgement</div>
@@ -53,9 +60,6 @@
                         <img class="remove" src="images/icon_2.svg" alt="Remove">
                     </div>
                 </div>
-            </div>
-            <div id="new-component-block">
-                <p>Click on a section below to add it to your readme</p>
                 <div class="list" draggable="true">
                     <img src="images/icon_1.svg" alt="Icon">
                     <div class="text">API Reference</div>

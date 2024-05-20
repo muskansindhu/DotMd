@@ -34,9 +34,19 @@ function dragAndDrop() {
                 addedComponentBlock.appendChild(selected);
                 let textToAdd = '';
     
-                if (selected.innerHTML.includes('Section 4')) {
-                    textToAdd = `\n\n## Hi Adhiraj`;
-                } else {
+                if (selected.innerHTML.includes('API Reference')) {
+                    textToAdd = apiReference();
+                }
+                else if (selected.innerHTML.includes('Acknowledgement')) {
+                    textToAdd = acknowledgement();
+                }
+                else if (selected.innerHTML.includes('Appendix')) {
+                    textToAdd = appendix();
+                }
+                else if (selected.innerHTML.includes('Authors')) {
+                    textToAdd = authors();
+                }
+                else {
                     textToAdd = description();
                 }
     
