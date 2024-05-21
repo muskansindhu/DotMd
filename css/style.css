@@ -226,3 +226,7 @@ nav ul, #component-block ul {
     word-wrap: break-word;
     border-bottom: 1px solid #eaecef;
 }
+
+.selected{
+    border: 2px solid #5271FF;;
+}
