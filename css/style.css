@@ -42,6 +42,7 @@ nav img {
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #ccc;
+    overflow-y: auto;
 }
 
 #markdown-content {
@@ -50,10 +51,6 @@ nav img {
     padding: 0px;
     box-sizing: border-box;
     border: 1px solid #ccc;
-}
-
-#preview-content {
-    font-family: initial;
 }
 
 #component-block{
@@ -215,4 +212,17 @@ nav ul, #component-block ul {
     padding: 16px;
     white-space: pre;
     word-break: normal;
+}
+
+.preview-container h2, .preview-container h3 {
+    box-sizing: border-box;
+    color: var(--base-colour);
+    font-family: var(--base-font-family);
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    margin-top: 24px;
+    padding-bottom: .3em;
+    word-wrap: break-word;
+    border-bottom: 1px solid #eaecef;
 }

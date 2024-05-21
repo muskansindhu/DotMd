@@ -21,8 +21,8 @@ require(["vs/editor/editor.main"], function() {
         lineNumbersMinChars: 0
     });
 
-    editor.getModel().onDidChangeContent(() => {
-        updatePreview();
+    editor.onDidChangeModelContent(() => {
+        currentSection(); 
     });
 });
 
@@ -30,10 +30,14 @@ document.addEventListener("DOMContentLoaded", function() {
     dragAndDrop();
 });
 
+let sectionContent = []; 
 function updatePreview() {
-    const markdownContent = editor.getValue();
+    let previewContent = ""; 
+    for (const content of sectionContent) {
+        previewContent += content;
+    }
     const htmlPreview = document.getElementById('preview-content');
-    const htmlContent = marked.parse(markdownContent);
+    const htmlContent = marked.parse(previewContent);
     htmlPreview.innerHTML = DOMPurify.sanitize(htmlContent, { USE_PROFILES: { html: true } });
 }
 
@@ -42,44 +46,52 @@ function dragAndDrop() {
     let addedComponentBlock = document.getElementById("added-component-block");
     let markdownContent = document.getElementById('markdown-content');
 
-    for(list of lists) {
-        for (let list of lists) {
-            list.addEventListener("dragstart", function(e) {
-                selected = e.target;
-            });
-        }
-    
-        addedComponentBlock.addEventListener("dragover", function(e) {
-            e.preventDefault();
-        });
-    
-        addedComponentBlock.addEventListener("drop", function(e) {
-            e.preventDefault();
-            if (selected) {
-                addedComponentBlock.appendChild(selected);
-                let textToAdd = '';
-    
-                if (selected.innerHTML.includes('API Reference')) {
-                    textToAdd = apiReference();
-                }
-                else if (selected.innerHTML.includes('Acknowledgement')) {
-                    textToAdd = acknowledgement();
-                }
-                else if (selected.innerHTML.includes('Appendix')) {
-                    textToAdd = appendix();
-                }
-                else if (selected.innerHTML.includes('Authors')) {
-                    textToAdd = authors();
-                }
-                else {
-                    textToAdd = description();
-                }
-    
-                editor.setValue(editor.getValue() + textToAdd);
-                updatePreview();
-                selected = null;
-            }
+    for (list of lists) {
+        list.addEventListener("dragstart", function(e) {
+            selected = e.target;
         });
     }
+
+    addedComponentBlock.addEventListener("dragover", function(e) {
+        e.preventDefault();
+    });
+
+    addedComponentBlock.addEventListener("drop", function(e) {
+        e.preventDefault();
+        
+        if (selected) {
+            addedComponentBlock.appendChild(selected);
+            let textToAdd = '';
+
+            if (selected.innerHTML.includes('API Reference')) {
+                textToAdd = apiReference();
+            }
+            else if (selected.innerHTML.includes('Acknowledgement')) {
+                textToAdd = acknowledgement();
+            }
+            else if (selected.innerHTML.includes('Appendix')) {
+                textToAdd = appendix();
+            }
+            else if (selected.innerHTML.includes('Authors')) {
+                textToAdd = authors();
+            }
+            else {
+                textToAdd = description();
+            }
+            
+            sectionContent.push(textToAdd); 
+            editor.setValue(textToAdd);
+            updatePreview();
+            selected = null;
+        }
+    });
 }
 
+
+function currentSection() {
+    const currentContent = editor.getValue();
+    if (sectionContent.length > 0) {
+        sectionContent[sectionContent.length - 1] = currentContent; 
+        updatePreview(); 
+    }
+}
