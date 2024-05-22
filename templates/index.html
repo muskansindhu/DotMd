@@ -7,19 +7,19 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.23.0/min/vs/loader.min.js"></script>
-    <script src="components/Title&Description.js"></script>
-    <script src="components/Acknowledgement.js"></script>
-    <script src="components/ApiReference.js"></script>
-    <script src="components/Appendix.js"></script>
-    <script src="components/Authors.js"></script>
-    <script src="scripts/index.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <script src="{{ url_for('static', filename='js/components/Title&Description.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/components/Acknowledgement.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/components/ApiReference.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/components/Appendix.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/components/Authors.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Markdown-Editor</title>
 </head>
 <body>
     <nav>
         <ul>
-            <li><img src="images/logo.png"></li>
+            <li><img src="static/images/logo.png"></li>
         </ul>
         <ul>
             <li>
@@ -38,43 +38,43 @@
             <div id="new-component-block">
                 <p>Click on a section below to add it to your readme</p>
                 <div class="list" draggable="true" id="acknowledgement" role="button" onclick="selectedSection(this.id)">
-                    <img src="images/icon_1.svg" alt="Icon">
+                    <img src="static/images/icon_1.svg" alt="Icon">
                     <div class="text">Acknowledgement</div>
                     <div class="icon-container">
-                        <img class="reset" src="images/icon_3.svg" alt="Reset">
-                        <img class="remove" src="images/icon_2.svg" alt="Remove">
+                        <img class="reset" src="static/images/icon_3.svg" alt="Reset">
+                        <img class="remove" src="static/images/icon_2.svg" alt="Remove">
                     </div>
                 </div>
                 <div class="list" draggable="true" id="appendix" role="button" onclick="selectedSection(this.id)">
-                    <img src="images/icon_1.svg" alt="Icon">
+                    <img src="static/images/icon_1.svg" alt="Icon">
                     <div class="text">Appendix</div>
                     <div class="icon-container">
-                        <img class="reset" src="images/icon_3.svg" alt="Reset">
-                        <img class="remove" src="images/icon_2.svg" alt="Remove">
+                        <img class="reset" src="static/images/icon_3.svg" alt="Reset">
+                        <img class="remove" src="static/images/icon_2.svg" alt="Remove">
                     </div>
                 </div>
                 <div class="list" draggable="true" id="authors" role="button" onclick="selectedSection(this.id)">
-                    <img src="images/icon_1.svg" alt="Icon">
+                    <img src="static/images/icon_1.svg" alt="Icon">
                     <div class="text">Authors</div>
                     <div class="icon-container">
-                        <img class="reset" src="images/icon_3.svg" alt="Reset">
-                        <img class="remove" src="images/icon_2.svg" alt="Remove">
+                        <img class="reset" src="static/images/icon_3.svg" alt="Reset">
+                        <img class="remove" src="static/images/icon_2.svg" alt="Remove">
                     </div>
                 </div>
                 <div class="list" draggable="true" id="apiReference" role="button" onclick="selectedSection(this.id)">
-                    <img src="images/icon_1.svg" alt="Icon">
+                    <img src="static/images/icon_1.svg" alt="Icon">
                     <div class="text">API Reference</div>
                     <div class="icon-container">
-                        <img class="reset" src="images/icon_3.svg" alt="Reset">
-                        <img class="remove" src="images/icon_2.svg" alt="Remove">
+                        <img class="reset" src="static/images/icon_3.svg" alt="Reset">
+                        <img class="remove" src="static/images/icon_2.svg" alt="Remove">
                     </div>
                 </div>
                 <div class="list" draggable="true" id="title&description" role="button" onclick="selectedSection(this.id)">
-                    <img src="images/icon_1.svg" alt="Icon">
+                    <img src="static/images/icon_1.svg" alt="Icon">
                     <div class="text">Title and Description</div>    
                     <div class="icon-container">
-                        <img class="reset" src="images/icon_3.svg" alt="Reset">
-                        <img class="remove" src="images/icon_2.svg" alt="Remove">
+                        <img class="reset" src="static/images/icon_3.svg" alt="Reset">
+                        <img class="remove" src="static/images/icon_2.svg" alt="Remove">
                     </div>
                 </div>
             </div>
