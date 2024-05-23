@@ -3,7 +3,7 @@ require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-e
 let editor;
 let selected = null;
 let currentSectionId = null;
-let addedComponents = [];
+let addedComponents = JSON.parse(localStorage.getItem('addedComponents')) || [];
 
 require(["vs/editor/editor.main"], function() {
     editor = monaco.editor.create(document.getElementById('markdown-content'), {
@@ -94,7 +94,6 @@ function dragAndDrop() {
 
             if (!addedComponents.includes(sectionId)) {
                 addedComponents.push(sectionId);
-                console.log('Added Components:', addedComponents); 
                 saveStateToLocalStorage();
             }
         }
