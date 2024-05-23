@@ -3,6 +3,7 @@ require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-e
 let editor;
 let selected = null;
 let currentSectionId = null;
+let addedComponents = [];
 
 require(["vs/editor/editor.main"], function() {
     editor = monaco.editor.create(document.getElementById('markdown-content'), {
@@ -25,6 +26,7 @@ require(["vs/editor/editor.main"], function() {
     editor.onDidChangeModelContent(() => {
         currentSection(); 
     });
+    loadStateFromLocalStorage();  // Load state when editor is ready
 });
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -89,6 +91,12 @@ function dragAndDrop() {
             editor.setValue(textToAdd);
             updatePreview();
             selected = null;
+
+            if (!addedComponents.includes(sectionId)) {
+                addedComponents.push(sectionId);
+                console.log('Added Components:', addedComponents); 
+                saveStateToLocalStorage();
+            }
         }
     });
 }
@@ -98,6 +106,7 @@ function currentSection() {
         const currentContent = editor.getValue();
         sectionContent[currentSectionId] = currentContent; 
         updatePreview(); 
+        saveStateToLocalStorage(); 
     }
 }
 
@@ -111,4 +120,38 @@ function selectedSection(selectedSectionId) {
     currentSectionId = selectedSectionId;
     editor.setValue(sectionContent[selectedSectionId]);
     console.log(selectedSectionId);
+}
+
+function saveStateToLocalStorage() {
+    localStorage.setItem('sectionContent', JSON.stringify(sectionContent));
+    localStorage.setItem('currentSectionId', currentSectionId);
+    localStorage.setItem('addedComponents', JSON.stringify(addedComponents));
+}
+
+function loadStateFromLocalStorage() {
+    const savedSectionContent = localStorage.getItem('sectionContent');
+    const savedCurrentSectionId = localStorage.getItem('currentSectionId');
+    const savedAddedComponents = localStorage.getItem('addedComponents');
+
+    if (savedSectionContent) {
+        sectionContent = JSON.parse(savedSectionContent);
+    }
+
+    if (savedCurrentSectionId) {
+        currentSectionId = savedCurrentSectionId;
+        editor.setValue(sectionContent[currentSectionId] || '');
+    }
+
+    if (savedAddedComponents) {
+        addedComponents = JSON.parse(savedAddedComponents);
+        const addedComponentBlock = document.getElementById("added-component-block");
+        addedComponents.forEach(sectionId => {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                addedComponentBlock.appendChild(element);
+            }
+        });
+    }
+
+    updatePreview();
 }
