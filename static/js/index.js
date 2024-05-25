@@ -220,6 +220,7 @@ function reset(componentId){
     }
     else if (componentId === "badges") {
         text = badges();
+        sectionContent["badges"] = text
     }
     else if (componentId === "colorReference") {
         text = colorReference();
