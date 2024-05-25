@@ -37,11 +37,11 @@ let sectionContent = {};
 
 function updatePreview() {
     let previewContent = ""; 
-    for (const key in sectionContent) {
-        if (sectionContent.hasOwnProperty(key)) {
-            previewContent += sectionContent[key];
+    addedComponents.forEach(componentId => {
+        if (sectionContent.hasOwnProperty(componentId)) {
+            previewContent += sectionContent[componentId];
         }
-    }
+    });
     const htmlPreview = document.getElementById('preview-content');
     const htmlContent = marked.parse(previewContent);
     htmlPreview.innerHTML = DOMPurify.sanitize(htmlContent, { USE_PROFILES: { html: true } });
@@ -140,6 +140,7 @@ function dragAndDrop() {
             if (!addedComponents.includes(sectionId)) {
                 addedComponents.push(sectionId);
                 saveStateToLocalStorage();
+                updatePreview();
             }
         }
     });
@@ -266,7 +267,7 @@ function reset(componentId){
         text = logo();
         sectionContent["logo"] = text
     }
-    else if (componentId === "") {
+    else if (componentId === "screenshots") {
         text = screenshots();
         sectionContent["screenshots"] = text
     }
@@ -297,7 +298,67 @@ function remove(componentId) {
         addedComponentBlock.removeChild(component); 
         newComponentBlock.appendChild(component); 
 
-        delete sectionContent[componentId];
+        if (componentId === "acknowledgement") {
+            delete sectionContent["acknowledgement"];
+        }
+        else if (componentId === "apiReference") {
+            delete sectionContent["apiReference"];
+        }
+        else if (componentId === "appendix") {
+            delete sectionContent["appendix"];
+        }
+        else if (componentId === "title&description") {
+            delete sectionContent["title&description"];
+        }
+        else if (componentId === "badges") {
+            delete sectionContent["badges"];
+        }
+        else if (componentId === "colorReference") {
+            delete sectionContent["colorReference"];
+        }
+        else if (componentId === "contributing") {
+            delete sectionContent["contributing"];
+        }
+        else if (componentId === "demo") {
+            delete sectionContent["demo"];
+        }
+        else if (componentId === "deployment") {
+            delete sectionContent["deployment"];
+        }
+        else if (componentId === "documentation") {
+            delete sectionContent["documentation"];
+        }
+        else if (componentId === "envVariables") {
+            delete sectionContent["envVariables"];
+        }
+        else if (componentId === "faq") {
+            delete sectionContent["faq"];
+        }
+        else if (componentId === "features") {
+            delete sectionContent["features"];
+        }
+        else if (componentId === "feedback") {
+            delete sectionContent["feedback"];
+        }
+        else if (componentId === "license") {
+            delete sectionContent["license"];
+        }
+        else if (componentId === "logo") {
+            delete sectionContent["logo"];
+        }
+        else if (componentId === "screenshots") {
+            delete sectionContent["screenshots"];
+        }
+        else if (componentId === "technology") {
+            delete sectionContent["technology"];
+        }
+        else if (componentId === "usageOrExample") {
+            delete sectionContent["usageOrExample"];
+        }
+        else{
+            delete sectionContent["authors"];
+        }
+
         const index = addedComponents.indexOf(componentId);
         if (index !== -1) {
             addedComponents.splice(index, 1);
