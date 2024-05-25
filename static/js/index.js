@@ -82,6 +82,51 @@ function dragAndDrop() {
             else if (selected.innerHTML.includes('Authors')) {
                 textToAdd = authors();
             }
+            else if (selected.innerHTML.includes('Badges')) {
+                textToAdd = badges();
+            }
+            else if (selected.innerHTML.includes('Color Reference')) {
+                textToAdd = colorReference();
+            }
+            else if (selected.innerHTML.includes('Contributing')) {
+                textToAdd = contributing();
+            }
+            else if (selected.innerHTML.includes('Demo')) {
+                textToAdd = demo();
+            }
+            else if (selected.innerHTML.includes('Deployment')) {
+                textToAdd = deployment();
+            }
+            else if (selected.innerHTML.includes('Documentation')) {
+                textToAdd = documentation();
+            }
+            else if (selected.innerHTML.includes('Environment Variables')) {
+                textToAdd = envVariables();
+            }
+            else if (selected.innerHTML.includes('FAQ')) {
+                textToAdd = faq();
+            }
+            else if (selected.innerHTML.includes('Features')) {
+                textToAdd = features();
+            }
+            else if (selected.innerHTML.includes('Feedback')) {
+                textToAdd = feedback();
+            }
+            else if (selected.innerHTML.includes('License')) {
+                textToAdd = license();
+            }
+            else if (selected.innerHTML.includes('Logo')) {
+                textToAdd = logo();
+            }
+            else if (selected.innerHTML.includes('Screenshots')) {
+                textToAdd = screenshots();
+            }
+            else if (selected.innerHTML.includes('Technology')) {
+                textToAdd = technology();
+            }
+            else if (selected.innerHTML.includes('Usage/Example')) {
+                textToAdd = usageOrExample();
+            }
             else {
                 textToAdd = description();
             }
@@ -172,6 +217,65 @@ function reset(componentId){
     else if (componentId === "title&description") {
         text = description();
         sectionContent["title&description"] = text
+    }
+    else if (componentId === "badges") {
+        text = badges();
+    }
+    else if (componentId === "colorReference") {
+        text = colorReference();
+        sectionContent["colorReference"] = text
+    }
+    else if (componentId === "contributing") {
+        text = contributing();
+        sectionContent["contributing"] = text
+    }
+    else if (componentId === "demo") {
+        text = demo();
+        sectionContent["demo"] = text
+    }
+    else if (componentId === "deployment") {
+        text = deployment();
+        sectionContent["deployment"] = text
+    }
+    else if (componentId === "documentation") {
+        text = documentation();
+        sectionContent["documentation"] = text
+    }
+    else if (componentId === "envVariables") {
+        text = envVariables();
+        sectionContent["envVariables"] = text
+    }
+    else if (componentId === "faq") {
+        textToAdd = faq();
+        sectionContent["faq"] = text
+    }
+    else if (componentId === "features") {
+        text = features();
+        sectionContent["features"] = text
+    }
+    else if (componentId === "feedback") {
+        text = feedback();
+        sectionContent["feedback"] = text
+    }
+    else if (componentId === "license") {
+        text = license();
+        sectionContent["license"] = text
+    }
+    else if (componentId === "logo") {
+        text = logo();
+        sectionContent["logo"] = text
+    }
+    else if (componentId === "") {
+        text = screenshots();
+        sectionContent["screenshots"] = text
+    }
+    else if (componentId === "technology") {
+        text = technology();
+        sectionContent["technology"] = text
+    }
+    else if (componentId === "usageOrExample") {
+        text = usageOrExample();
+        sectionContent["usageOrExample"] = text
     }
     else{
         text = authors();
