@@ -118,7 +118,7 @@ function selectedSection(selectedSectionId) {
 
     currentSectionId = selectedSectionId;
     editor.setValue(sectionContent[selectedSectionId]);
-    console.log(selectedSectionId);
+    // console.log(selectedSectionId);
 }
 
 function saveStateToLocalStorage() {
@@ -152,5 +152,34 @@ function loadStateFromLocalStorage() {
         });
     }
 
+    updatePreview();
+}
+
+function reset(componentId){
+
+    let text = ""
+    if (componentId === "acknowledgement") {
+        text = acknowledgement()
+        sectionContent["acknowledgement"] = text
+    }
+    else if (componentId === "apiReference") {
+        text = apiReference();
+        sectionContent["apiReference"] = text
+    }
+    else if (componentId === "appendix") {
+        text = appendix();
+        sectionContent["appendix"] = text
+    }
+    else if (componentId === "title&description") {
+        text = description();
+        sectionContent["title&description"] = text
+    }
+    else{
+        text = authors();
+        sectionContent["authors"] = text
+    }
+
+    saveStateToLocalStorage(); 
+    loadStateFromLocalStorage();
     updatePreview();
 }
