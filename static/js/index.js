@@ -156,7 +156,6 @@ function loadStateFromLocalStorage() {
 }
 
 function reset(componentId){
-
     let text = ""
     if (componentId === "acknowledgement") {
         text = acknowledgement()
@@ -182,4 +181,25 @@ function reset(componentId){
     saveStateToLocalStorage(); 
     loadStateFromLocalStorage();
     updatePreview();
+}
+
+function remove(componentId) {
+    let addedComponentBlock = document.getElementById('added-component-block');
+    let newComponentBlock = document.getElementById('new-component-block');
+    let component = document.getElementById(componentId);
+
+    if (component && addedComponentBlock.contains(component)) {
+        addedComponentBlock.removeChild(component); 
+        newComponentBlock.appendChild(component); 
+
+        delete sectionContent[componentId];
+        const index = addedComponents.indexOf(componentId);
+        if (index !== -1) {
+            addedComponents.splice(index, 1);
+        }
+
+        saveStateToLocalStorage();
+        loadStateFromLocalStorage();
+        updatePreview();
+    }
 }
