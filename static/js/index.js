@@ -66,6 +66,16 @@ function rawPreview(){
     rawPreviewContent.innerHTML = rawPreview
 }
 
+function getRaw(){
+    let raw=""
+    addedComponents.forEach(componentId => {
+        if (sectionContent.hasOwnProperty(componentId)) {
+            raw = raw + sectionContent[componentId] + '\n';
+        }
+    });
+    return raw
+}
+
 function dragAndDrop() {
     let lists = document.getElementsByClassName("list");
     let addedComponentBlock = document.getElementById("added-component-block");
@@ -388,3 +398,19 @@ function remove(componentId) {
         updatePreview();
     }
 }
+
+function download() {
+    let rawText = getRaw()
+    let filename = "README.md";
+
+    let element = document.createElement('a');
+    element.setAttribute('href',
+        'data:text/plain;charset=utf-8, '
+        + encodeURIComponent(rawText));
+    element.setAttribute('download', filename);
+    document.body.appendChild(element);
+    element.click();
+
+    document.body.removeChild(element);
+}
+
