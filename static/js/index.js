@@ -37,6 +37,8 @@ let sectionContent = {};
 
 function updatePreview() {
     let previewContent = ""; 
+    const rawPreviewLabel = document.getElementById('raw-label')
+    const previewLabel = document.getElementById('preview-label')
     addedComponents.forEach(componentId => {
         if (sectionContent.hasOwnProperty(componentId)) {
             previewContent += sectionContent[componentId];
@@ -44,7 +46,24 @@ function updatePreview() {
     });
     const htmlPreview = document.getElementById('preview-content');
     const htmlContent = marked.parse(previewContent);
+    rawPreviewLabel.style.color ="rgb(90, 89, 89)"
+    previewLabel.style.color ="#6fb3f7"
     htmlPreview.innerHTML = DOMPurify.sanitize(htmlContent, { USE_PROFILES: { html: true } });
+}
+
+function rawPreview(){
+    let rawPreview=""
+    const rawPreviewLabel = document.getElementById('raw-label')
+    const previewLabel = document.getElementById('preview-label')
+    addedComponents.forEach(componentId => {
+        if (sectionContent.hasOwnProperty(componentId)) {
+            rawPreview = rawPreview + sectionContent[componentId] + '<br><br>';
+        }
+    });
+    const rawPreviewContent = document.getElementById('preview-content');
+    rawPreviewLabel.style.color ="#6fb3f7"
+    previewLabel.style.color ="rgb(90, 89, 89)"
+    rawPreviewContent.innerHTML = rawPreview
 }
 
 function dragAndDrop() {

@@ -215,12 +215,12 @@
             </div>
         </div>
         <div class="editor-container">
-            <p class="label">Editor</p>
+            <p class="label" id="editor-label">Editor</p>
             <div id="markdown-content"></div>
         </div>
         <div class="preview-container">
-            <p class="label">Preview</p>
-            <p class="label" style="color: rgb(90, 89, 89); left: 80px;">Raw</p>
+            <p class="label" id="preview-label" onclick="updatePreview()">Preview</p>
+            <p class="label" style="color: rgb(90, 89, 89); left: 80px;" role="button" onclick="rawPreview()" id="raw-label">Raw</p>
             <div id="preview-content"></div>
         </div>
     </div>
