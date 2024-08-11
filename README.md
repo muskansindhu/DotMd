@@ -13,7 +13,7 @@
 ## Getting Started
 
  **Local Installation**:
-   - Clone the repo: `[git clone https://github.com/muskansindhu/Markdown-Editor.git](https://github.com/muskansindhu/Markdown-Editor.git)`
+   - Clone the repo: `git clone https://github.com/muskansindhu/Markdown-Editor.git`
    - Install dependencies: `pip install -r requirements.txt`
    - Start the app: `python app.py`
    - Visit `http://localhost:5000`
