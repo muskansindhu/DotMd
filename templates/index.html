@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="static/images/favicon.ico"
+      type="image/x-icon"
+    />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.23.0/min/vs/loader.min.js"></script>
@@ -28,201 +32,534 @@
     <script src="{{ url_for('static', filename='js/components/UsageOrExample.js') }}"></script>
     <script src="{{ url_for('static', filename='js/components/Authors.js') }}"></script>
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
     <title>Markdown-Editor</title>
-</head>
-<body>
+  </head>
+  <body>
     <nav>
-        <ul>
-            <li><img src="static/images/logo.png"></li>
-        </ul>
-        <ul>
-            <li>
-                <div class="button" id="download-btn" onclick="download()">
-                    Download
-                </div>
-            </li>
-        </ul>
+      <ul>
+        <li><img src="static/images/logo.png" /></li>
+      </ul>
+      <ul>
+        <li>
+          <div class="button" id="download-btn" onclick="download()">
+            Download
+          </div>
+        </li>
+      </ul>
     </nav>
-    <div id="editor">    
-        <div id="component-block">
-            <div id="component-block-head"><p>Sections</p></div>
-            <div id="added-component-block">
-                <p>Click on a section below to edit the contents</p>
+    <div id="editor">
+      <div id="component-block">
+        <div id="component-block-head"><p>Sections</p></div>
+        <div id="added-component-block">
+          <p>Click on a section below to edit the contents</p>
+        </div>
+        <div id="new-component-block">
+          <p>Click on a section below to add it to your readme</p>
+          <div
+            class="list"
+            draggable="true"
+            id="acknowledgement"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Acknowledgement</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
             </div>
-            <div id="new-component-block">
-                <p>Click on a section below to add it to your readme</p>
-                <div class="list" draggable="true" id="acknowledgement" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Acknowledgement</div>
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="appendix" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Appendix</div>
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="authors" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Authors</div>
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="apiReference" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">API Reference</div>
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="badges" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Badges</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="colorReference" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Color Reference</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="contributing" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Contributing</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="demo" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Demo</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="deployment" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Deployment</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="documentation" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Documentation</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="envVariables" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Environment Variables</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="faq" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">FAQ</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="features" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Features</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="feedback" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Feedback</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="license" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">License</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="logo" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Logo</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="screenshots" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Screenshots</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="technology" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Technology</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="usageOrExample" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Usage/Example</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
-                <div class="list" draggable="true" id="title&description" role="button" onclick="selectedSection(this.id)">
-                    <img src="static/images/icon_1.svg" alt="Icon">
-                    <div class="text">Title and Description</div>    
-                    <div class="icon-container">
-                        <img class="reset" src="static/images/icon_3.svg" alt="Reset" onclick="reset(this.closest('.list').id)">
-                        <img class="remove" src="static/images/icon_2.svg" alt="Remove" onclick="remove(this.closest('.list').id)">
-                    </div>
-                </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="appendix"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Appendix</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
             </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="authors"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Authors</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="apiReference"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">API Reference</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="badges"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Badges</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="colorReference"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Color Reference</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="contributing"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Contributing</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="demo"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Demo</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="deployment"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Deployment</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="documentation"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Documentation</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="envVariables"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Environment Variables</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="faq"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">FAQ</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="features"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Features</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="feedback"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Feedback</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="license"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">License</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="logo"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Logo</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="screenshots"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Screenshots</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="technology"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Technology</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="usageOrExample"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Usage/Example</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
+          <div
+            class="list"
+            draggable="true"
+            id="title&description"
+            role="button"
+            onclick="selectedSection(this.id)"
+          >
+            <img src="static/images/icon_1.svg" alt="Icon" />
+            <div class="text">Title and Description</div>
+            <div class="icon-container">
+              <img
+                class="reset"
+                src="static/images/icon_3.svg"
+                alt="Reset"
+                onclick="reset(this.closest('.list').id)"
+              />
+              <img
+                class="remove"
+                src="static/images/icon_2.svg"
+                alt="Remove"
+                onclick="remove(this.closest('.list').id)"
+              />
+            </div>
+          </div>
         </div>
-        <div class="editor-container">
-            <p class="label" id="editor-label">Editor</p>
-            <div id="markdown-content"></div>
-        </div>
-        <div class="preview-container">
-            <p class="label" id="preview-label" onclick="updatePreview()">Preview</p>
-            <p class="label" style="color: rgb(90, 89, 89); left: 80px;" role="button" onclick="rawPreview()" id="raw-label">Raw</p>
-            <div id="preview-content"></div>
-        </div>
+      </div>
+      <div class="editor-container">
+        <p class="label" id="editor-label">Editor</p>
+        <div id="markdown-content"></div>
+      </div>
+      <div class="preview-container">
+        <p class="label" id="preview-label" onclick="updatePreview()">
+          Preview
+        </p>
+        <p
+          class="label"
+          style="color: rgb(90, 89, 89); left: 80px"
+          role="button"
+          onclick="rawPreview()"
+          id="raw-label"
+        >
+          Raw
+        </p>
+        <div id="preview-content"></div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
