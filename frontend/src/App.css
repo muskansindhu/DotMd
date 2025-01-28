@@ -1,0 +1,19 @@
+.layout-container {
+  display: flex;
+  width: 100%;
+}
+
+.menu-section {
+  margin-top: 4%;
+  width: 25%;
+}
+
+.editor-section {
+  margin-top: 5%;
+  width: 37%;
+}
+
+.preview-section {
+  margin-top: 5%;
+  width: 37%;
+}
