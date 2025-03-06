@@ -1,18 +1,28 @@
 import React, { useState } from "react";
-
 import { sectionList } from "../section-templates/section";
 import Dialog from "@mui/material/Dialog";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { useContext } from "react";
+import { slugContext } from "../../context/slug.js";
 
 const Menu = () => {
   const [section, setSection] = useState(sectionList);
   const [open, setOpen] = React.useState(false);
   const [formData, setFormData] = useState({ name: "" });
+
+  const { setSlug } = useContext(slugContext);
+
+  const handleClickToSelect = (slugObj) => {
+    setSlug({
+      slug: slugObj.slug,
+      name: slugObj.name,
+      markdown: slugObj.markdown,
+    });
+  };
 
   const handleClickToOpen = () => {
     setOpen(true);
@@ -43,21 +53,25 @@ const Menu = () => {
   return (
     <div>
       <div>
-        <Dialog open={open} onClose={() => handleToClose()}>
-          <DialogTitle>{"Add Custom Section"}</DialogTitle>
+        <Dialog
+          open={open}
+          onClose={() => handleToClose()}
+          sx={{
+            "& .MuiDialog-paper": {
+              width: "40vw",
+              maxWidth: "none",
+            },
+          }}
+        >
+          <DialogTitle>{"New Custom Section"}</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Enter the name for your new section.
-            </DialogContentText>
             <form onSubmit={handleSubmit}>
               <TextField
-                autoFocus
                 margin="dense"
                 name="name"
-                label="Name"
+                label="Section Title"
                 type="text"
                 fullWidth
-                variant="outlined"
                 value={formData.name}
                 onChange={handleFormChange}
               />
@@ -66,8 +80,8 @@ const Menu = () => {
           <DialogActions>
             <Button
               onClick={() => handleToClose(formData.name)}
-              color="primary"
-              autoFocus
+              color="secondary"
+              variant="contained"
             >
               Add
             </Button>
@@ -77,11 +91,25 @@ const Menu = () => {
       <div className="scrollable-list-container">
         {" "}
         <ul>
+          <h5 className="section-menu-title">
+            Click on a section below to edit the contents
+          </h5>
+          <br />
+          <br />
+        </ul>
+        <ul>
+          <h5 className="section-menu-title">
+            Click on a section below to add it to your readme
+          </h5>
           <li onClick={handleClickToOpen} className="add-section-button">
             <div className="add-section-button-text">Custom Section</div>
           </li>
           {section.map((item) => (
-            <li key={item.slug} className="list-item">
+            <li
+              onClick={() => handleClickToSelect(item)}
+              key={item.slug}
+              className="list-item"
+            >
               <div className="list-item-text">{item.name}</div>
             </li>
           ))}
