@@ -11,10 +11,20 @@ import { slugContext } from "../../context/slug.js";
 
 const Menu = () => {
   const [section, setSection] = useState(sectionList);
+  const [selectedSection, setSelectedSection] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [formData, setFormData] = useState({ name: "" });
 
   const { setSlug } = useContext(slugContext);
+
+  const addSectionToSelectedSection = (item) => {
+    setSelectedSection([...selectedSection, item]);
+  };
+
+  const removeSectionFromAddSectionMenu = (item) => {
+    const updatedSectionList = section.filter((section) => section !== item);
+    setSection(updatedSectionList);
+  };
 
   const handleClickToSelect = (slugObj) => {
     setSlug({
@@ -22,6 +32,9 @@ const Menu = () => {
       name: slugObj.name,
       markdown: slugObj.markdown,
     });
+
+    addSectionToSelectedSection(slugObj);
+    removeSectionFromAddSectionMenu(slugObj);
   };
 
   const handleClickToOpen = () => {
@@ -94,6 +107,11 @@ const Menu = () => {
           <h5 className="section-menu-title">
             Click on a section below to edit the contents
           </h5>
+          {selectedSection.map((item) => (
+            <li key={item.slug} className="list-item">
+              <div className="list-item-text">{item.name}</div>
+            </li>
+          ))}
           <br />
           <br />
         </ul>
