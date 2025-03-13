@@ -11,7 +11,14 @@ const options = {
 };
 
 function MarkdownEditor() {
-  const { slug } = useContext(slugContext);
+  const { slug, setSlug } = useContext(slugContext);
+
+  const handleEditorChange = (value, event) => {
+    setSlug((prevSlug) => ({
+      ...prevSlug,
+      markdown: value,
+    }));
+  };
 
   return (
     <Editor
@@ -21,6 +28,7 @@ function MarkdownEditor() {
       defaultLanguage="markdown"
       theme="vs-dark"
       options={options}
+      onChange={handleEditorChange}
     />
   );
 }
