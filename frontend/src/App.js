@@ -5,6 +5,7 @@ import "./App.css";
 import Navbar from "./components/ui/Navbar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SlugProvider } from "./context/slug";
+import { ContentProvider } from "./context/content";
 import { React } from "react";
 
 const theme = createTheme({
@@ -35,26 +36,26 @@ const theme = createTheme({
 });
 
 function App() {
-  const sampleMarkdown = "";
-
   return (
     <SlugProvider>
-      <ThemeProvider theme={theme}>
-        <div className="App">
-          <Navbar></Navbar>
-          <div className="layout-container">
-            <div className="menu-section">
-              <Menu />
-            </div>
-            <div className="editor-section">
-              <MarkdownEditor />
-            </div>
-            <div className="preview-section">
-              <Preview markdownText={sampleMarkdown} />
+      <ContentProvider>
+        <ThemeProvider theme={theme}>
+          <div className="App">
+            <Navbar></Navbar>
+            <div className="layout-container">
+              <div className="menu-section">
+                <Menu />
+              </div>
+              <div className="editor-section">
+                <MarkdownEditor />
+              </div>
+              <div className="preview-section">
+                <Preview />
+              </div>
             </div>
           </div>
-        </div>
-      </ThemeProvider>
+        </ThemeProvider>
+      </ContentProvider>
     </SlugProvider>
   );
 }

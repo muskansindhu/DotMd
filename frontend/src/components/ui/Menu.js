@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { sectionList } from "../section-templates/section";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useContext } from "react";
 import { slugContext } from "../../context/slug.js";
+import { contentContext } from "../../context/content.js";
 
 const Menu = () => {
   const [section, setSection] = useState(sectionList);
@@ -16,6 +17,12 @@ const Menu = () => {
   const [formData, setFormData] = useState({ name: "" });
 
   const { setSlug } = useContext(slugContext);
+
+  const { setContent } = useContext(contentContext);
+
+  useEffect(() => {
+    setContent(selectedSection);
+  }, [selectedSection, setContent]);
 
   const addSectionToSelectedSection = (item) => {
     setSelectedSection([...selectedSection, item]);
