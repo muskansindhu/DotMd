@@ -1,17 +1,6 @@
 import { createContext } from "react";
 import { useState } from "react";
 
-// export const slugContext = createContext({
-//   slug: "title-and-description",
-//   name: "Title and Description",
-//   markdown: `
-// # Project Title
-
-// A brief description of what this project does and who it's for
-
-// `,
-// });
-
 export const slugContext = createContext({
   slug: {
     slug: "title-and-description",
