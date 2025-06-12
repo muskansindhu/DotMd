@@ -218,7 +218,7 @@ export const sectionList = [
     markdown: `
   ## Authors
   
-  - [@octokatherine](https://www.github.com/octokatherine)
+  - [@muskansindhu](https://www.github.com/muskansindhu)
   
   `,
   },

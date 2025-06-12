@@ -306,3 +306,35 @@ code:not(.preview pre code) {
   outline: 0;
   text-decoration: underline;
 }
+
+.drag-icon {
+  margin-left: 10px;
+}
+
+.refresh-icon {
+  margin-right: 10px;
+}
+
+.trash-icon {
+  margin-right: 10px;
+}
+
+.drag-icon {
+  cursor: grab;
+}
+.drag-icon:active {
+  cursor: grabbing;
+}
+
+.active-section {
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  background-color: #b4d8fc;
+}
+
+.editor-placeholder-title {
+  font: medium sans-serif;
+  font-size: medium;
+  text-align: center;
+  color: #007bff;
+}

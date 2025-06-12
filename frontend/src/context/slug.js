@@ -3,28 +3,18 @@ import { useState } from "react";
 
 export const slugContext = createContext({
   slug: {
-    slug: "title-and-description",
-    name: "Title and Description",
-    markdown: `
-  # Project Title
-  
-  A brief description of what this project does and who it's for
-  
-  `,
+    slug: "",
+    name: "",
+    markdown: ``,
   },
   setSlug: (slug) => {},
 });
 
 export const SlugProvider = (props) => {
   const [slug, setSlug] = useState({
-    slug: "title-and-description",
-    name: "Title and Description",
-    markdown: `
-  # Project Title
-  
-  A brief description of what this project does and who it's for
-  
-  `,
+    slug: "",
+    name: "",
+    markdown: ``,
   });
   return (
     <slugContext.Provider value={{ slug, setSlug }}>

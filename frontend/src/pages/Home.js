@@ -46,7 +46,7 @@ const Home = () => {
             right: 0,
             width: "500px",
             height: "120px",
-            backgroundImage: "url('/dotmd(3).png')",
+            backgroundImage: "url('/dotmd(2).png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -59,7 +59,7 @@ const Home = () => {
             left: 0,
             width: "500px",
             height: "190px",
-            backgroundImage: "url('/dotmd(3).png')",
+            backgroundImage: "url('/dotmd(2).png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

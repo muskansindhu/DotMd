@@ -1,42 +1,26 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import Markdown from "react-markdown";
 import { contentContext } from "../../context/content";
-import remarkGfm from "remark-gfm";
 import { slugContext } from "../../context/slug";
+import remarkGfm from "remark-gfm";
 
 const Preview = () => {
-  const { content, setContent } = useContext(contentContext);
+  const { content } = useContext(contentContext);
   const { slug } = useContext(slugContext);
-  const [combinedMarkdown, setCombinedMarkdown] = useState("");
 
-  useEffect(() => {
-    const updatedContent = content.map((item) =>
+  const mergedContent = useMemo(() => {
+    return content.map((item) =>
       item.slug === slug.slug ? { ...item, markdown: slug.markdown } : item
     );
+  }, [content, slug]);
 
-    setContent((prevContent) => {
-      const mergedContent = prevContent.map(
-        (prevItem) =>
-          updatedContent.find((newItem) => newItem.slug === prevItem.slug) ||
-          prevItem
-      );
+  const combinedMarkdown = useMemo(() => {
+    return mergedContent.map((item) => item.markdown).join("\n\n");
+  }, [mergedContent]);
 
-      return [
-        ...mergedContent,
-        ...updatedContent.filter(
-          (newItem) =>
-            !prevContent.some((prevItem) => prevItem.slug === newItem.slug)
-        ),
-      ];
-    });
-
-    const newMarkdown = updatedContent
-      .map((item) => item.markdown)
-      .join("\n\n");
-    setCombinedMarkdown(newMarkdown);
-
-    localStorage.setItem("slug", JSON.stringify(updatedContent));
-  }, [slug, content, setContent]);
+  useEffect(() => {
+    localStorage.setItem("slug", JSON.stringify(mergedContent));
+  }, [mergedContent]);
 
   return (
     <div className="preview-container">
