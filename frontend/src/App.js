@@ -4,6 +4,7 @@ import Navbar from "./components/ui/Navbar";
 import Templates from "./pages/Templates";
 import Home from "./pages/Home";
 import Editor from "./pages/Editor";
+import TemplatePreview from "./pages/TemplatePreview";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/templates" element={<Templates />} />
         <Route path="/markdown-editor" element={<Editor />} />
+        <Route path="/preview" element={<TemplatePreview />} />
       </Routes>
     </>
   );

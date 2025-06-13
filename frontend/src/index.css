@@ -338,3 +338,27 @@ code:not(.preview pre code) {
   text-align: center;
   color: #007bff;
 }
+
+.template-preview-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  padding-bottom: 4rem;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.template-preview {
+  border: 1px solid #c7c7c7;
+  background: white;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}

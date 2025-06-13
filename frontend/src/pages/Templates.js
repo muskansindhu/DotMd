@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Box } from "@mui/material";
-import { MuiCard } from "../components/ui/MuiCard";
+import { TemplateInfoCard } from "../components/ui/TemplateInfoCard";
 
 const theme = createTheme({
   palette: {
@@ -44,37 +44,49 @@ const Templates = () => {
         }}
       >
         <Box display="flex" justifyContent="center" gap={4}>
-          <MuiCard
+          <TemplateInfoCard
             image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="Template #1"
+            title="Oidc.Server"
             description="This is template description."
+            tempId="OdicServer"
+            githubLink={"https://github.com/Abblix/Oidc.Server"}
           />
-          <MuiCard
+          <TemplateInfoCard
             image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="Template #2"
+            title="size-limit"
             description="This is template description."
+            tempId="SizeLimit"
+            githubLink={"https://github.com/ai/size-limit"}
           />
-          <MuiCard
+          <TemplateInfoCard
             image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="Template #3"
+            title="Aimeos-Typo3"
             description="This is template description."
+            tempId="AimeosTypo3"
+            githubLink={"https://github.com/aimeos/aimeos-typo3"}
           />
         </Box>
         <Box display="flex" justifyContent="center" gap={4}>
-          <MuiCard
+          <TemplateInfoCard
             image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="Template #4"
+            title="zoxide"
             description="This is template description."
+            tempId="Zoxide"
+            githubLink={"https://github.com/ajeetdsouza/zoxide"}
           />
-          <MuiCard
+          <TemplateInfoCard
             image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="Template #5"
+            title="shallow-backup"
             description="This is template description."
+            tempId="ShallowBackup"
+            githubLink={"https://github.com/alichtman/shallow-backup"}
           />
-          <MuiCard
+          <TemplateInfoCard
             image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="Template #6"
+            title="stronghold.rs"
             description="This is template description."
+            tempId="Stronghold"
+            githubLink={"https://github.com/alichtman/stronghold"}
           />
         </Box>
       </Box>
