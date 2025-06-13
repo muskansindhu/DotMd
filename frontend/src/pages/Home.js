@@ -1,136 +1,138 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, Container } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { FaGithub } from "react-icons/fa";
 
 const theme = createTheme({
   palette: {
-    primary: { main: "#5474f9" },
-    secondary: { main: "#98bae7" },
-    background: { default: "#c4ebe4" },
+    primary: { main: "#6C63FF" },
+    secondary: { main: "#FFFFFF" },
+    background: {
+      default: "#f9fafe",
+    },
   },
   typography: {
-    fontFamily: "Arial, sans-serif",
+    fontFamily: "'Inter', sans-serif",
   },
 });
 
+const dotPattern = `radial-gradient(circle, rgba(108,99,255,0.2) 1px, transparent 1px)`;
+
 const Home = () => {
   const navigate = useNavigate();
-
-  const handleExploreTemplatesClick = () => {
-    navigate("/templates");
-  };
-
-  const handleTryEditorClick = () => {
-    navigate("/markdown-editor");
-  };
 
   return (
     <ThemeProvider theme={theme}>
       <Box
         sx={{
           height: "100vh",
+          width: "100%",
+          backgroundColor: theme.palette.background.default,
+          backgroundImage: dotPattern,
+          backgroundSize: "20px 20px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#ffffff",
-          padding: "2rem",
+          textAlign: "center",
           position: "relative",
+          overflow: "hidden",
         }}
       >
         <Box
           sx={{
             position: "absolute",
-            top: 0,
-            right: 0,
-            width: "500px",
-            height: "120px",
-            backgroundImage: "url('/dotmd(2).png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            top: "40px",
+            left: "100px",
           }}
-        ></Box>
-
+        >
+          <img
+            src="/logo.png"
+            alt="Logo"
+            style={{ height: "70px", width: "auto", cursor: "pointer" }}
+            onClick={() => navigate("/")}
+          />
+        </Box>
         <Box
           sx={{
             position: "absolute",
-            bottom: 0,
-            left: 0,
-            width: "500px",
-            height: "190px",
-            backgroundImage: "url('/dotmd(2).png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            top: "50px",
+            right: "100px",
+            cursor: "pointer",
+            color: "#1a1a1a",
+            "&:hover": { color: "#5474f9" },
           }}
-        ></Box>
-
-        <Typography
-          variant="h4"
-          component="h1"
-          sx={{
-            color: "#000000",
-            fontWeight: "bold",
-            marginBottom: "1rem",
-            textAlign: "center",
-          }}
+          onClick={() =>
+            window.open(
+              "https://github.com/muskansindhu/Markdown-Editor",
+              "_blank"
+            )
+          }
         >
-          Welcome to .md - Your Markdown Creation Tool
-        </Typography>
-        <Box sx={{ maxWidth: "80vw", textAlign: "center" }}>
+          <FaGithub size={45} />
+        </Box>
+        <Container maxWidth="md">
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 800,
+              color: "#1a1a1a",
+              mb: 2,
+            }}
+          >
+            Create beautiful{" "}
+            <Box component="span" sx={{ color: "#5474f9" }}>
+              README
+            </Box>{" "}
+            files in seconds
+          </Typography>
+
           <Typography
             variant="h6"
-            component="p"
             sx={{
-              color: "#808080",
-              marginBottom: "1rem",
-              lineHeight: 1.6,
+              color: "#555",
+              mb: 4,
             }}
           >
-            Easily create markdown files with .md! Use predefined sections,
-            customize your own, or explore top GitHub templates. Start now and
-            unlock endless possibilities!
+            Markdown made simple. Drag sections, edit content, and preview live
+            — all in one place.
           </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            gap: "1rem",
-            justifyContent: "center",
-            marginTop: "2rem",
-          }}
-        >
-          <Button
-            variant="contained"
-            color="secondary"
-            sx={{
-              padding: "1rem 2rem",
-              fontSize: "1.2rem",
-              backgroundColor: "#b9d2f9",
-              "&:hover": {
-                backgroundColor: "#88a9d4",
-              },
-            }}
-            onClick={handleExploreTemplatesClick}
-          >
-            Explore Templates
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            sx={{
-              padding: "1rem 2rem",
-              fontSize: "1.2rem",
-              backgroundColor: "#b9d2f9",
-              "&:hover": {
-                backgroundColor: "#88a9d4",
-              },
-            }}
-            onClick={handleTryEditorClick}
-          >
-            Try Online Editor
-          </Button>
-        </Box>
+
+          <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
+            <Button
+              variant="contained"
+              size="large"
+              sx={{
+                backgroundColor: "#5474f9",
+                color: "white",
+                px: 4,
+                "&:hover": {
+                  backgroundColor: "#3b5fda",
+                },
+              }}
+              onClick={() => navigate("/markdown-editor")}
+            >
+              Try the Editor
+            </Button>
+
+            <Button
+              variant="outlined"
+              size="large"
+              sx={{
+                borderColor: "#5474f9",
+                color: "#5474f9",
+                px: 4,
+                "&:hover": {
+                  backgroundColor: "#f0f0ff",
+                },
+              }}
+              onClick={() => navigate("/templates")}
+            >
+              Explore Templates
+            </Button>
+          </Box>
+        </Container>
       </Box>
     </ThemeProvider>
   );
