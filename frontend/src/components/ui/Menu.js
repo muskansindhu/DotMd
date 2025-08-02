@@ -15,17 +15,34 @@ import { FaTrashAlt } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Menu = () => {
-  const [section, setSection] = useState(
-    sectionList.sort((a, b) => a.name.localeCompare(b.name))
-  );
-  const [selectedSection, setSelectedSection] = useState([]);
+  const [section, setSection] = useState(() => {
+    const stored = localStorage.getItem("slug");
+    let selectedSlugs = [];
+    try {
+      selectedSlugs = stored ? JSON.parse(stored).map((s) => s.slug) : [];
+    } catch {
+      selectedSlugs = [];
+    }
+    return sectionList
+      .filter((s) => !selectedSlugs.includes(s.slug))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  });
   const [open, setOpen] = React.useState(false);
   const [formData, setFormData] = useState({ name: "" });
   const { slug, setSlug } = useContext(slugContext);
   const { setContent } = useContext(contentContext);
   const [draggedIndex, setDraggedIndex] = useState(null);
+  const [selectedSection, setSelectedSection] = useState(() => {
+    const stored = localStorage.getItem("slug");
+    try {
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
 
   useEffect(() => {
+    localStorage.setItem("slug", JSON.stringify(selectedSection));
     setContent(selectedSection);
   }, [selectedSection, setContent]);
 
@@ -148,6 +165,13 @@ const Menu = () => {
     });
   };
 
+  const handleResetAll = () => {
+    localStorage.removeItem("slug");
+    setSelectedSection([]);
+    setSection(sectionList.sort((a, b) => a.name.localeCompare(b.name)));
+    setSlug({ slug: "", name: "", markdown: "" });
+  };
+
   return (
     <div>
       <div>
@@ -186,6 +210,29 @@ const Menu = () => {
           </DialogActions>
         </Dialog>
       </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "16px",
+          marginRight: "20px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            cursor: "pointer",
+            color: "#444",
+          }}
+          onClick={handleResetAll}
+        >
+          <span class="reset-btn">Reset</span>
+          <SlRefresh size={15} />
+        </div>
+      </div>
+
       <div className="scrollable-list-container">
         {" "}
         <ul>

@@ -37,6 +37,19 @@ const handleDownloadClick = async (tempId) => {
   }
 };
 
+const handleEditClick = async (tempId) => {
+  try {
+    const module = await import(`../../readme-templates/${tempId}.js`);
+    const sectionList = module.sectionList || [];
+
+    localStorage.setItem("slug", JSON.stringify(sectionList));
+
+    window.location.href = `/editor`;
+  } catch (error) {
+    console.error("Error loading template for editing:", error);
+  }
+};
+
 export const TemplateInfoCard = ({
   image,
   title,
@@ -77,7 +90,7 @@ export const TemplateInfoCard = ({
           <Button size="small" onClick={() => handleDownloadClick(tempId)}>
             <BsSaveFill size={20} color="black" />
           </Button>
-          <Button size="small">
+          <Button size="small" onClick={() => handleEditClick(tempId)}>
             <FaRegEdit size={20} color="black" />
           </Button>
         </CardActions>

@@ -26,18 +26,18 @@ const Home = () => {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          height: "100vh",
+          minHeight: "100vh",
           width: "100%",
           backgroundColor: theme.palette.background.default,
           backgroundImage: dotPattern,
           backgroundSize: "20px 20px",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
           alignItems: "center",
-          textAlign: "center",
           position: "relative",
-          overflow: "hidden",
+          overflowX: "hidden",
+          pt: 12,
+          pb: 0,
         }}
       >
         <Box
@@ -54,6 +54,8 @@ const Home = () => {
             onClick={() => navigate("/")}
           />
         </Box>
+
+        {/* GitHub Icon */}
         <Box
           sx={{
             position: "absolute",
@@ -72,15 +74,10 @@ const Home = () => {
         >
           <FaGithub size={45} />
         </Box>
-        <Container maxWidth="md">
-          <Typography
-            variant="h2"
-            sx={{
-              fontWeight: 800,
-              color: "#1a1a1a",
-              mb: 2,
-            }}
-          >
+
+        {/* Main Text */}
+        <Container maxWidth="md" sx={{ textAlign: "center" }}>
+          <Typography variant="h2" fontWeight={800} color="#1a1a1a" mb={2}>
             Create beautiful{" "}
             <Box component="span" sx={{ color: "#5474f9" }}>
               README
@@ -88,18 +85,15 @@ const Home = () => {
             files in seconds
           </Typography>
 
-          <Typography
-            variant="h6"
-            sx={{
-              color: "#555",
-              mb: 4,
-            }}
-          >
+          <Typography variant="h6" color="#555" mb={4}>
             Markdown made simple. Drag sections, edit content, and preview live
             — all in one place.
           </Typography>
 
-          <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
+          {/* CTA Buttons */}
+          <Box
+            sx={{ display: "flex", justifyContent: "center", gap: 2, mb: 6 }}
+          >
             <Button
               variant="contained"
               size="large"
@@ -111,11 +105,10 @@ const Home = () => {
                   backgroundColor: "#3b5fda",
                 },
               }}
-              onClick={() => navigate("/markdown-editor")}
+              onClick={() => navigate("/editor")}
             >
               Try the Editor
             </Button>
-
             <Button
               variant="outlined"
               size="large"
@@ -132,7 +125,41 @@ const Home = () => {
               Explore Templates
             </Button>
           </Box>
+
+          <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
+            <img
+              src="/homepage-preview.png"
+              alt="Editor Screenshot"
+              style={{
+                maxWidth: "100%",
+                borderRadius: "12px",
+                boxShadow: "0px 10px 40px rgba(0, 0, 0, 0.1)",
+              }}
+            />
+          </Box>
         </Container>
+        <Box
+          sx={{
+            width: "100%",
+            py: 2,
+            textAlign: "center",
+            borderTop: "1px solid #ddd",
+            backgroundColor: "#333",
+          }}
+        >
+          <Typography
+            variant="body2"
+            color="#f5f5f5"
+            sx={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.8rem",
+              lineHeight: 1.2,
+              letterSpacing: "0.01rem",
+            }}
+          >
+            Made with ♡ by Muskan | &copy; {new Date().getFullYear()}
+          </Typography>
+        </Box>
       </Box>
     </ThemeProvider>
   );

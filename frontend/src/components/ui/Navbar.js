@@ -68,13 +68,13 @@ export default function Navbar() {
 
           <Button
             color="inherit"
-            onClick={() => handleNavigation("/markdown-editor")}
-            sx={{ fontWeight: path === "/markdown-editor" ? "bold" : "normal" }}
+            onClick={() => handleNavigation("/editor")}
+            sx={{ fontWeight: path === "/editor" ? "bold" : "normal" }}
           >
             Editor
           </Button>
 
-          {path === "/markdown-editor" && (
+          {path === "/editor" && (
             <Button
               variant="contained"
               onClick={handleDownloadClick}
