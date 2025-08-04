@@ -1,11 +1,10 @@
-import os
-import json
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from dotenv import load_dotenv
 from pydantic import BaseModel
 from google import genai
-
+import os
+import json
 
 load_dotenv()
 
@@ -16,14 +15,18 @@ class AISuggestion(BaseModel):
     section_content: str
 
 app = Flask(__name__)
-CORS(app)
+
+CORS(app, origins=["http://localhost:3000"], methods=["POST", "OPTIONS"], allow_headers=["Content-Type"])
 
 @app.route("/")
 def index():
     return "Hello World"
 
-@app.route("/ai-suggestion", methods=["POST"])
+@app.route("/ai-suggestion", methods=["POST", "OPTIONS"])
 def ai_suggestion():
+    if request.method == "OPTIONS":
+        return jsonify({"message": "CORS preflight OK"}), 200
+
     data = request.get_json()
     section_details = data.get("section_details", "")
 
@@ -39,14 +42,13 @@ def ai_suggestion():
         model="gemini-2.5-flash",
         contents=prompt,
         config={
-        "response_mime_type": "application/json",
-        "response_schema": AISuggestion,
-    },
+            "response_mime_type": "application/json",
+            "response_schema": AISuggestion,
+        },
     )
 
     parsed = json.loads(response.text)
-
     return jsonify(parsed)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=5002, debug=True)

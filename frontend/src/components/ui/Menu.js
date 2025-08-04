@@ -30,16 +30,9 @@ const Menu = () => {
   const [open, setOpen] = React.useState(false);
   const [formData, setFormData] = useState({ name: "" });
   const { slug, setSlug } = useContext(slugContext);
-  const { setContent } = useContext(contentContext);
   const [draggedIndex, setDraggedIndex] = useState(null);
-  const [selectedSection, setSelectedSection] = useState(() => {
-    const stored = localStorage.getItem("slug");
-    try {
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
-    }
-  });
+  const { selectedSection, setSelectedSection, setContent } =
+    useContext(contentContext);
 
   useEffect(() => {
     localStorage.setItem("slug", JSON.stringify(selectedSection));
@@ -228,7 +221,7 @@ const Menu = () => {
           }}
           onClick={handleResetAll}
         >
-          <span class="reset-btn">Reset</span>
+          <span className="reset-btn">Reset</span>
           <SlRefresh size={15} />
         </div>
       </div>

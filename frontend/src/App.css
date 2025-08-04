@@ -17,3 +17,12 @@
   margin-top: 5%;
   width: 37%;
 }
+
+.ai-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 8px;
+  margin-top: 20px;
+  width: 10px;
+}

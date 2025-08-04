@@ -1,16 +1,21 @@
-import { createContext } from "react";
-import { useState } from "react";
+import { createContext, useState } from "react";
 
 export const contentContext = createContext({
   content: [],
-  setContent: (content) => {},
+  setContent: () => {},
+  selectedSection: [],
+  setSelectedSection: () => {},
 });
 
-export const ContentProvider = (props) => {
+export const ContentProvider = ({ children }) => {
   const [content, setContent] = useState([]);
+  const [selectedSection, setSelectedSection] = useState([]);
+
   return (
-    <contentContext.Provider value={{ content, setContent }}>
-      {props.children}
+    <contentContext.Provider
+      value={{ content, setContent, selectedSection, setSelectedSection }}
+    >
+      {children}
     </contentContext.Provider>
   );
 };

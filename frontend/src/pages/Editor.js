@@ -5,7 +5,7 @@ import "../App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SlugProvider } from "../context/slug";
 import { ContentProvider } from "../context/content";
-import React from "react";
+import AISuggestionButton from "../components/ui/AISuggestionButton";
 
 const theme = createTheme({
   palette: {
@@ -44,9 +44,13 @@ function Editor() {
               <div className="menu-section">
                 <Menu />
               </div>
+              <div className="ai-bar">
+                <AISuggestionButton />
+              </div>
               <div className="editor-section">
                 <MarkdownEditor />
               </div>
+
               <div className="preview-section">
                 <Preview />
               </div>
