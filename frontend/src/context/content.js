@@ -8,8 +8,19 @@ export const contentContext = createContext({
 });
 
 export const ContentProvider = ({ children }) => {
+  const initialSelectedSection = (() => {
+    try {
+      const stored = localStorage.getItem("slug");
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  })();
+
   const [content, setContent] = useState([]);
-  const [selectedSection, setSelectedSection] = useState([]);
+  const [selectedSection, setSelectedSection] = useState(
+    initialSelectedSection
+  );
 
   return (
     <contentContext.Provider
