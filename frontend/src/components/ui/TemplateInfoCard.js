@@ -6,6 +6,8 @@ import {
   CardActions,
   Button,
   CardMedia,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { FaGithub } from "react-icons/fa";
 import { VscOpenPreview } from "react-icons/vsc";
@@ -57,41 +59,111 @@ export const TemplateInfoCard = ({
   tempId,
   githubLink,
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
-    <Box width="300px">
-      <Card>
+    <Box 
+      sx={{ 
+        width: "100%",
+        maxWidth: { xs: "100%", sm: "350px", md: "300px" },
+        height: "100%"
+      }}
+    >
+      <Card 
+        sx={{ 
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          transition: "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
+          "&:hover": {
+            transform: "translateY(-4px)",
+            boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+          }
+        }}
+      >
         <CardMedia
           component="img"
-          height="140"
+          height={isMobile ? "120" : "140"}
           image={image}
           alt={title}
-        ></CardMedia>
-        <CardContent>
-          <Typography gutterBottom variant="h6" component="div">
+          sx={{
+            objectFit: "cover"
+          }}
+        />
+        <CardContent sx={{ flexGrow: 1, pb: 1 }}>
+          <Typography 
+            gutterBottom 
+            variant="h6" 
+            component="div"
+            sx={{
+              fontSize: { xs: "1.1rem", sm: "1.25rem" },
+              fontWeight: "bold",
+              lineHeight: 1.2,
+              mb: 1
+            }}
+          >
             {title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography 
+            variant="body2" 
+            color="text.secondary"
+            sx={{
+              fontSize: { xs: "0.85rem", sm: "0.875rem" },
+              lineHeight: 1.4
+            }}
+          >
             {description}
           </Typography>
         </CardContent>
-        <CardActions>
-          <a href={githubLink}>
-            <Button size="small">
-              <FaGithub size={20} color="black" />
+        <CardActions 
+          sx={{ 
+            justifyContent: isMobile ? "space-around" : "flex-start",
+            px: 2,
+            pb: 2,
+            pt: 0
+          }}
+        >
+          <a href={githubLink} target="_blank" rel="noopener noreferrer">
+            <Button 
+              size="small"
+              sx={{
+                minWidth: { xs: "40px", sm: "auto" },
+                p: { xs: 1, sm: 1 }
+              }}
+            >
+              <FaGithub size={isMobile ? 18 : 20} color="black" />
             </Button>
           </a>
-          <Button size="small">
-            <VscOpenPreview
-              size={20}
-              color="black"
-              onClick={() => handleOpenTemplatePreview(tempId)}
-            />
+          <Button 
+            size="small"
+            onClick={() => handleOpenTemplatePreview(tempId)}
+            sx={{
+              minWidth: { xs: "40px", sm: "auto" },
+              p: { xs: 1, sm: 1 }
+            }}
+          >
+            <VscOpenPreview size={isMobile ? 18 : 20} color="black" />
           </Button>
-          <Button size="small" onClick={() => handleDownloadClick(tempId)}>
-            <BsSaveFill size={20} color="black" />
+          <Button 
+            size="small" 
+            onClick={() => handleDownloadClick(tempId)}
+            sx={{
+              minWidth: { xs: "40px", sm: "auto" },
+              p: { xs: 1, sm: 1 }
+            }}
+          >
+            <BsSaveFill size={isMobile ? 18 : 20} color="black" />
           </Button>
-          <Button size="small" onClick={() => handleEditClick(tempId)}>
-            <FaRegEdit size={20} color="black" />
+          <Button 
+            size="small" 
+            onClick={() => handleEditClick(tempId)}
+            sx={{
+              minWidth: { xs: "40px", sm: "auto" },
+              p: { xs: 1, sm: 1 }
+            }}
+          >
+            <FaRegEdit size={isMobile ? 18 : 20} color="black" />
           </Button>
         </CardActions>
       </Card>

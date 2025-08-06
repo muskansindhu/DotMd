@@ -1,21 +1,28 @@
 .layout-container {
   display: flex;
   width: 100%;
+  min-height: calc(100vh - 64px); /* Account for navbar */
 }
 
 .menu-section {
   margin-top: 4%;
   width: 25%;
+  min-width: 250px;
+  padding: 0 10px;
 }
 
 .editor-section {
   margin-top: 5%;
   width: 37%;
+  min-width: 300px;
+  padding: 0 10px;
 }
 
 .preview-section {
   margin-top: 5%;
   width: 37%;
+  min-width: 300px;
+  padding: 0 10px;
 }
 
 .ai-bar {
@@ -25,4 +32,98 @@
   padding: 8px;
   margin-top: 20px;
   width: 10px;
+  min-width: 60px;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 960px) {
+  .layout-container {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .menu-section {
+    display: none; /* Hidden on mobile, shown in drawer */
+  }
+
+  .ai-bar {
+    display: none; /* Hidden on mobile, shown in drawer */
+  }
+
+  .editor-section,
+  .preview-section {
+    width: 100%;
+    margin-top: 0;
+    padding: 16px;
+    min-width: unset;
+  }
+}
+
+/* Tablet Responsive Styles */
+@media (max-width: 1200px) and (min-width: 961px) {
+  .layout-container {
+    gap: 10px;
+  }
+
+  .menu-section {
+    width: 22%;
+    min-width: 220px;
+  }
+
+  .editor-section,
+  .preview-section {
+    width: 39%;
+    min-width: 280px;
+  }
+
+  .ai-bar {
+    width: 8px;
+    min-width: 50px;
+  }
+}
+
+/* Large Screen Styles */
+@media (min-width: 1400px) {
+  .layout-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 20px;
+  }
+
+  .menu-section {
+    width: 24%;
+    min-width: 280px;
+  }
+
+  .editor-section,
+  .preview-section {
+    width: 38%;
+    min-width: 350px;
+  }
+}
+
+/* General Mobile Optimizations */
+@media (max-width: 960px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Ensure buttons and interactive elements are touch-friendly */
+  button, 
+  .MuiButton-root,
+  .MuiIconButton-root {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Optimize text input for mobile */
+  input, 
+  textarea,
+  .MuiTextField-root {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
 }

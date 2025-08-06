@@ -1,5 +1,5 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import { Box, Container, Grid, useMediaQuery, useTheme } from "@mui/material";
 import { TemplateInfoCard } from "../components/ui/TemplateInfoCard";
 
 const theme = createTheme({
@@ -30,66 +30,98 @@ const theme = createTheme({
 });
 
 const Templates = () => {
+  const muiTheme = useTheme();
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
+  const isTablet = useMediaQuery(muiTheme.breakpoints.down('lg'));
+
+  const templates = [
+    {
+      image: "https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png",
+      title: "Oidc.Server",
+      description: "This is template description.",
+      tempId: "OdicServer",
+      githubLink: "https://github.com/Abblix/Oidc.Server"
+    },
+    {
+      image: "https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png",
+      title: "size-limit",
+      description: "This is template description.",
+      tempId: "SizeLimit",
+      githubLink: "https://github.com/ai/size-limit"
+    },
+    {
+      image: "https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png",
+      title: "Aimeos-Typo3",
+      description: "This is template description.",
+      tempId: "AimeosTypo3",
+      githubLink: "https://github.com/aimeos/aimeos-typo3"
+    },
+    {
+      image: "https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png",
+      title: "zoxide",
+      description: "This is template description.",
+      tempId: "Zoxide",
+      githubLink: "https://github.com/ajeetdsouza/zoxide"
+    },
+    {
+      image: "https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png",
+      title: "shallow-backup",
+      description: "This is template description.",
+      tempId: "ShallowBackup",
+      githubLink: "https://github.com/alichtman/shallow-backup"
+    },
+    {
+      image: "https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png",
+      title: "stronghold.rs",
+      description: "This is template description.",
+      tempId: "Stronghold",
+      githubLink: "https://github.com/alichtman/stronghold"
+    }
+  ];
+
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        display="flex"
-        flexDirection="column"
-        gap={4}
-        mt={4}
-        sx={{
-          height: "600px",
-          overflowX: "auto",
-          paddingBottom: "80vh",
+      <Container 
+        maxWidth="xl" 
+        sx={{ 
+          py: { xs: 3, sm: 4, md: 6 },
+          px: { xs: 2, sm: 3, md: 4 },
+          minHeight: 'calc(100vh - 64px)'
         }}
       >
-        <Box display="flex" justifyContent="center" gap={4}>
-          <TemplateInfoCard
-            image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="Oidc.Server"
-            description="This is template description."
-            tempId="OdicServer"
-            githubLink={"https://github.com/Abblix/Oidc.Server"}
-          />
-          <TemplateInfoCard
-            image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="size-limit"
-            description="This is template description."
-            tempId="SizeLimit"
-            githubLink={"https://github.com/ai/size-limit"}
-          />
-          <TemplateInfoCard
-            image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="Aimeos-Typo3"
-            description="This is template description."
-            tempId="AimeosTypo3"
-            githubLink={"https://github.com/aimeos/aimeos-typo3"}
-          />
-        </Box>
-        <Box display="flex" justifyContent="center" gap={4}>
-          <TemplateInfoCard
-            image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="zoxide"
-            description="This is template description."
-            tempId="Zoxide"
-            githubLink={"https://github.com/ajeetdsouza/zoxide"}
-          />
-          <TemplateInfoCard
-            image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="shallow-backup"
-            description="This is template description."
-            tempId="ShallowBackup"
-            githubLink={"https://github.com/alichtman/shallow-backup"}
-          />
-          <TemplateInfoCard
-            image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
-            title="stronghold.rs"
-            description="This is template description."
-            tempId="Stronghold"
-            githubLink={"https://github.com/alichtman/stronghold"}
-          />
-        </Box>
-      </Box>
+        <Grid 
+          container 
+          spacing={{ xs: 2, sm: 3, md: 4 }}
+          justifyContent="center"
+          alignItems="stretch"
+        >
+          {templates.map((template, index) => (
+            <Grid 
+              item 
+              key={template.tempId}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={4}
+              xl={3}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center'
+              }}
+            >
+              <Box sx={{ width: '100%', maxWidth: { xs: '100%', sm: '400px' } }}>
+                <TemplateInfoCard
+                  image={template.image}
+                  title={template.title}
+                  description={template.description}
+                  tempId={template.tempId}
+                  githubLink={template.githubLink}
+                />
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </ThemeProvider>
   );
 };
