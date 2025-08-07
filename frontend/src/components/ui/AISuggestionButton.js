@@ -73,9 +73,9 @@ export default function AISuggestionButton() {
       <Tooltip title="AI Suggest Section">
         <IconButton onClick={handleOpen} color="secondary" size="small">
           <img
-            src="/assets/star.png"
+            src="/assets/sparkle.png"
             alt="AI Suggest"
-            style={{ width: 20, height: 20 }}
+            style={{ width: 30, height: 30 }}
           />
         </IconButton>
       </Tooltip>

@@ -1,5 +1,5 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { TemplateInfoCard } from "../components/ui/TemplateInfoCard";
 
 const theme = createTheme({
@@ -30,6 +30,8 @@ const theme = createTheme({
 });
 
 const Templates = () => {
+  const isMobile = useMediaQuery("(max-width:900px)");
+
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -38,12 +40,18 @@ const Templates = () => {
         gap={4}
         mt={4}
         sx={{
-          height: "600px",
+          height: { xs: "auto", md: "600px" },
           overflowX: "auto",
-          paddingBottom: "80vh",
+          paddingBottom: { xs: 2, md: "80vh" },
         }}
       >
-        <Box display="flex" justifyContent="center" gap={4}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          gap={4}
+          flexDirection={isMobile ? "column" : "row"}
+          alignItems="center"
+        >
           <TemplateInfoCard
             image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
             title="Oidc.Server"
@@ -66,7 +74,13 @@ const Templates = () => {
             githubLink={"https://github.com/aimeos/aimeos-typo3"}
           />
         </Box>
-        <Box display="flex" justifyContent="center" gap={4}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          gap={4}
+          flexDirection={isMobile ? "column" : "row"}
+          alignItems="center"
+        >
           <TemplateInfoCard
             image="https://culturedcode.com/frozen/2021/08/hero-markdown-guide.p128.png"
             title="zoxide"

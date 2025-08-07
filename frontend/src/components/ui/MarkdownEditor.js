@@ -9,6 +9,7 @@ const options = {
   scrollbar: { vertical: "hidden" },
   lineNumbers: "off",
   wordWrap: "on",
+  accessibilitySupport: "off",
 };
 
 function MarkdownEditor() {
@@ -34,15 +35,17 @@ function MarkdownEditor() {
   return (
     <>
       {content.length > 0 ? (
-        <Editor
-          value={slug.markdown}
-          height="80vh"
-          width="95%"
-          defaultLanguage="markdown"
-          theme="vs-dark"
-          options={options}
-          onChange={handleEditorChange}
-        />
+        <div className="editor-container">
+          <Editor
+            value={slug.markdown}
+            height="100%"
+            width="100%"
+            defaultLanguage="markdown"
+            theme="vs-dark"
+            options={options}
+            onChange={handleEditorChange}
+          />
+        </div>
       ) : (
         <h5 className="editor-placeholder-title">
           Please select a section from the section menu to edit.

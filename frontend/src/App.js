@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/ui/Navbar";
 import Templates from "./pages/Templates";
 import Home from "./pages/Home";
@@ -7,9 +7,10 @@ import Editor from "./pages/Editor";
 import TemplatePreview from "./pages/TemplatePreview";
 
 const App = () => {
+  const location = useLocation();
   return (
     <>
-      <Navbar />
+      {location.pathname !== "/editor" && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/templates" element={<Templates />} />

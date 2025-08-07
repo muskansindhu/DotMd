@@ -1,5 +1,11 @@
 import React from "react";
-import { Box, Button, Typography, Container } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Container,
+  useMediaQuery,
+} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
@@ -21,6 +27,7 @@ const dotPattern = `radial-gradient(circle, rgba(108,99,255,0.2) 1px, transparen
 
 const Home = () => {
   const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   return (
     <ThemeProvider theme={theme}>
@@ -36,21 +43,26 @@ const Home = () => {
           alignItems: "center",
           position: "relative",
           overflowX: "hidden",
-          pt: 12,
+          pt: { xs: 6, sm: 12 },
           pb: 0,
         }}
       >
         <Box
           sx={{
             position: "absolute",
-            top: "40px",
-            left: "100px",
+            top: { xs: "20px", sm: "40px" },
+            left: { xs: "16px", sm: "100px" },
+            zIndex: 2,
           }}
         >
           <img
             src="/logo.png"
             alt="Logo"
-            style={{ height: "70px", width: "auto", cursor: "pointer" }}
+            style={{
+              height: isMobile ? "48px" : "70px",
+              width: "auto",
+              cursor: "pointer",
+            }}
             onClick={() => navigate("/")}
           />
         </Box>
@@ -59,11 +71,12 @@ const Home = () => {
         <Box
           sx={{
             position: "absolute",
-            top: "50px",
-            right: "100px",
+            top: { xs: "28px", sm: "50px" },
+            right: { xs: "16px", sm: "100px" },
             cursor: "pointer",
             color: "#1a1a1a",
             "&:hover": { color: "#5474f9" },
+            zIndex: 2,
           }}
           onClick={() =>
             window.open(
@@ -72,12 +85,28 @@ const Home = () => {
             )
           }
         >
-          <FaGithub size={45} />
+          <FaGithub size={isMobile ? 32 : 45} />
         </Box>
 
         {/* Main Text */}
-        <Container maxWidth="md" sx={{ textAlign: "center" }}>
-          <Typography variant="h2" fontWeight={800} color="#1a1a1a" mb={2}>
+        <Container
+          maxWidth="md"
+          sx={{
+            textAlign: "center",
+            mt: { xs: 7, sm: 0 },
+            px: { xs: 1, sm: 3 },
+          }}
+        >
+          <Typography
+            variant="h2"
+            fontWeight={800}
+            color="#1a1a1a"
+            mb={2}
+            sx={{
+              fontSize: { xs: "2rem", sm: "3rem" },
+              lineHeight: { xs: 1.2, sm: 1.15 },
+            }}
+          >
             Create beautiful{" "}
             <Box component="span" sx={{ color: "#5474f9" }}>
               README
@@ -85,14 +114,30 @@ const Home = () => {
             files in seconds
           </Typography>
 
-          <Typography variant="h6" color="#555" mb={4}>
+          <Typography
+            variant="h6"
+            color="#555"
+            mb={4}
+            sx={{
+              fontSize: { xs: "1rem", sm: "1.25rem" },
+              lineHeight: 1.4,
+            }}
+          >
             Markdown made simple. Drag sections, edit content, and preview live
             — all in one place.
           </Typography>
 
           {/* CTA Buttons */}
           <Box
-            sx={{ display: "flex", justifyContent: "center", gap: 2, mb: 6 }}
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 2,
+              mb: 6,
+              width: "100%",
+            }}
           >
             <Button
               variant="contained"
@@ -101,6 +146,8 @@ const Home = () => {
                 backgroundColor: "#5474f9",
                 color: "white",
                 px: 4,
+                width: { xs: "100%", sm: "auto" },
+                mb: { xs: 1, sm: 0 },
                 "&:hover": {
                   backgroundColor: "#3b5fda",
                 },
@@ -116,6 +163,7 @@ const Home = () => {
                 borderColor: "#5474f9",
                 color: "#5474f9",
                 px: 4,
+                width: { xs: "100%", sm: "auto" },
                 "&:hover": {
                   backgroundColor: "#f0f0ff",
                 },
@@ -132,6 +180,7 @@ const Home = () => {
               alt="Editor Screenshot"
               style={{
                 maxWidth: "100%",
+                width: isMobile ? "100%" : "700px",
                 borderRadius: "12px",
                 boxShadow: "0px 10px 40px rgba(0, 0, 0, 0.1)",
               }}
@@ -145,6 +194,7 @@ const Home = () => {
             textAlign: "center",
             borderTop: "1px solid #ddd",
             backgroundColor: "#333",
+            mt: "auto",
           }}
         >
           <Typography
@@ -152,7 +202,7 @@ const Home = () => {
             color="#f5f5f5"
             sx={{
               fontFamily: "'Inter', sans-serif",
-              fontSize: "0.8rem",
+              fontSize: { xs: "0.7rem", sm: "0.8rem" },
               lineHeight: 1.2,
               letterSpacing: "0.01rem",
             }}

@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import DescriptionIcon from "@mui/icons-material/Description";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import MenuIcon from "@mui/icons-material/Menu";
+import DownloadIcon from "@mui/icons-material/Download";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Drawer from "@mui/material/Drawer";
+import { Menu } from "./Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
-export default function Navbar() {
+export default function Navbar({ onDownload }) {
   const location = useLocation();
   const path = location.pathname;
+  const isMobile = useMediaQuery("(max-width:900px)");
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   if (path === "/") return null;
 
@@ -47,45 +58,79 @@ export default function Navbar() {
       >
         <Toolbar sx={{ justifyContent: "flex-start" }}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <img src="/logo.png" width={60} height={60} alt="Logo" />
+            <img
+              src="/logo.png"
+              width={60}
+              height={60}
+              alt="Logo"
+              onClick={() => handleNavigation("/")}
+            />
           </Typography>
 
-          <Button
-            color="inherit"
-            onClick={() => handleNavigation("/")}
-            sx={{ fontWeight: path === "/" ? "bold" : "normal" }}
-          >
-            Home
-          </Button>
+          {/* Show Templates icon except on /templates */}
+          {path !== "/templates" && (
+            <Tooltip title="Templates">
+              <IconButton
+                color="inherit"
+                onClick={() => handleNavigation("/templates")}
+              >
+                <DescriptionIcon />
+              </IconButton>
+            </Tooltip>
+          )}
 
-          <Button
-            color="inherit"
-            onClick={() => handleNavigation("/templates")}
-            sx={{ fontWeight: path === "/templates" ? "bold" : "normal" }}
-          >
-            Templates
-          </Button>
+          {/* Show Editor icon except on /editor */}
+          {path !== "/editor" && (
+            <Tooltip title="Editor">
+              <IconButton
+                color="inherit"
+                onClick={() => handleNavigation("/editor")}
+              >
+                <EditNoteIcon />
+              </IconButton>
+            </Tooltip>
+          )}
 
-          <Button
-            color="inherit"
-            onClick={() => handleNavigation("/editor")}
-            sx={{ fontWeight: path === "/editor" ? "bold" : "normal" }}
-          >
-            Editor
-          </Button>
-
+          {/* Editor page specific icons */}
           {path === "/editor" && (
-            <Button
-              variant="contained"
-              onClick={handleDownloadClick}
-              sx={{
-                ml: 2,
-                backgroundColor: "#5474f9",
-                "&:hover": { backgroundColor: "#3b5fda" },
-              }}
-            >
-              Download
-            </Button>
+            <>
+              <Tooltip title="Download README">
+                <IconButton
+                  color="inherit"
+                  onClick={onDownload || handleDownloadClick}
+                >
+                  <DownloadIcon />
+                </IconButton>
+              </Tooltip>
+              {/* Hamburger menu for mobile */}
+              {isMobile && (
+                <>
+                  <Tooltip title="Sections & AI">
+                    <IconButton
+                      color="inherit"
+                      onClick={() => setDrawerOpen(true)}
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Drawer
+                    anchor="left"
+                    open={drawerOpen}
+                    onClose={() => setDrawerOpen(false)}
+                    PaperProps={{
+                      sx: { width: { xs: "90vw", sm: 350 }, p: 2 },
+                    }}
+                  >
+                    <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                      <IconButton onClick={() => setDrawerOpen(false)}>
+                        <CloseIcon />
+                      </IconButton>
+                    </Box>
+                    <Menu />
+                  </Drawer>
+                </>
+              )}
+            </>
           )}
         </Toolbar>
       </AppBar>
