@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from google import genai
 import os
 import json
+from ai_helper.generator import ReadmeGenerator
 
 load_dotenv()
 
@@ -22,7 +23,7 @@ CORS(app, origins=["http://localhost:3000"], methods=["POST", "OPTIONS"], allow_
 def index():
     return "Hello World"
 
-@app.route("/ai-suggestion", methods=["POST", "OPTIONS"])
+@app.route("/ai-section-suggestion", methods=["POST", "OPTIONS"])
 def ai_suggestion():
     if request.method == "OPTIONS":
         return jsonify({"message": "CORS preflight OK"}), 200
@@ -49,6 +50,21 @@ def ai_suggestion():
 
     parsed = json.loads(response.text)
     return jsonify(parsed)
+
+@app.route("/ai-readme-suggestion", methods=["POST", "OPTIONS"])
+def ai_readme_suggestion():
+    if request.method == "OPTIONS":
+        return jsonify({"message": "CORS preflight OK"}), 200
+
+    generator = ReadmeGenerator()
+
+    data = request.get_json()
+    repo_url = data.get("repo_url", "")
+    
+    readme_sections = generator.generate_readme(repo_url)
+    return {"readme": readme_sections}
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002, debug=True)
