@@ -39,11 +39,14 @@ export default function AISuggestionButton() {
     try {
       if (mode === "section") {
         // Single section suggestion
-        const res = await fetch("http://localhost:5002/ai-section-suggestion", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ section_details: sectionDetails }),
-        });
+        const res = await fetch(
+          `${process.env.REACT_APP_API_BASE_URL}/ai-section-suggestion`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ section_details: sectionDetails }),
+          }
+        );
 
         const data = await res.json();
         const sectionName = data.section_name?.trim() || "AI Section";
@@ -73,11 +76,14 @@ export default function AISuggestionButton() {
         });
       } else {
         // Full README suggestion
-        const res = await fetch("http://localhost:5002/ai-readme-suggestion", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ repo_url: repoUrl }),
-        });
+        const res = await fetch(
+          `${process.env.REACT_APP_API_BASE_URL}/ai-readme-suggestion`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ repo_url: repoUrl }),
+          }
+        );
 
         const data = await res.json();
         if (data.readme && typeof data.readme === "object") {
