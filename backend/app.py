@@ -17,7 +17,7 @@ class AISuggestion(BaseModel):
 
 app = Flask(__name__)
 
-CORS(app, origins=["http://localhost:3000"], methods=["POST", "OPTIONS"], allow_headers=["Content-Type"])
+CORS(app, resources={r"/*": {"origins": "https://dotmd.muskansindhu.tech"}})
 
 @app.route("/")
 def index():
